@@ -104,5 +104,12 @@ app.py
 ```
 - Test it using [Postman](https://www.postman.com/)
 
+# Who
+[Davy Nimbona](https://github.com/davymariko)
 
+[Manasa Devinoolu](https://github.com/manasanoolu7)
+
+[Christophe Schellinck](https://github.com/christopheschellinck) 
+
+[Selma Esen](https://github.com/selmaesen)
 
