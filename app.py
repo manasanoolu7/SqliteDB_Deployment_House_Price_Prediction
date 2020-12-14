@@ -18,10 +18,8 @@ def home():
     parameters: GET
     return: "Alive!"
     """
-    resp = make_response("Alive!")
-    resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
-    return resp
-    #return "Alive!"
+
+    return "Alive!"
 
 
 @app.route('/welcome', methods=["GET"])
@@ -31,10 +29,7 @@ def welcome():
     parameters: GET
     return: "Welcome to API Deployment"
     """
-    resp = make_response("Welcome to API Deployment")
-    resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
-    return resp
-    #return "Welcome to API Deployment"
+    return "Welcome to API Deployment"
 
 
 @app.route("/predict", methods=["GET", "POST"])
@@ -63,10 +58,8 @@ def predict_api():
             message = {
                 "Predicted price": round(result, 2)
             }
-            resp = make_response(message)
-            resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
-            return jsonify(resp)
-            #return jsonify(message)
+
+            return jsonify(message)
     elif request.method == "GET":
         message = "The page accept a POST request of data in following format:\n"
         data = "<p>{<br>area': int,<br>'property_type': 'APARTMENT' | 'HOUSE' \
@@ -74,12 +67,9 @@ def predict_api():
             : Optional[bool],<br>'equipped_kitchen': Optional[bool],<br>\
             'furnished': Opional[bool],<br>'terrace': Optional[bool],<br>\
             'facades_number': Optional[int]<br>}"
-        resp = make_response(message+data)
-        resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
-        return jsonify(resp)
-        # return jsonify(message)
-        #return (message+data)
+
+        return (message+data)
 
 
 if __name__ == '__main__':
-    app.run(port=5500)
+    app.run(port=5000)
