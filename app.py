@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,make_response
 
 from pipeline.predict.prediction import predict
 #from pipeline.preprocessing.cleaning_data_ver02 import preprocess
@@ -18,8 +18,8 @@ def home():
     parameters: GET
     return: "Alive!"
     """
-    resp = make_response("Alive!")  
-    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp = make_response("Alive!")
+    resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
     return resp
     #return "Alive!"
 
@@ -31,7 +31,10 @@ def welcome():
     parameters: GET
     return: "Welcome to API Deployment"
     """
-    return "Welcome to API Deployment"
+    resp = make_response("Welcome to API Deployment")
+    resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
+    return resp
+    #return "Welcome to API Deployment"
 
 
 @app.route("/predict", methods=["GET", "POST"])
@@ -60,8 +63,10 @@ def predict_api():
             message = {
                 "Predicted price": round(result, 2)
             }
-            message.headers['Access-Control-Allow-Origin'] = '*'
-            return jsonify(message)
+            resp = make_response(message)
+            resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
+            return jsonify(resp)
+            #return jsonify(message)
     elif request.method == "GET":
         message = "The page accept a POST request of data in following format:\n"
         data = "<p>{<br>area': int,<br>'property_type': 'APARTMENT' | 'HOUSE' \
@@ -69,9 +74,12 @@ def predict_api():
             : Optional[bool],<br>'equipped_kitchen': Optional[bool],<br>\
             'furnished': Opional[bool],<br>'terrace': Optional[bool],<br>\
             'facades_number': Optional[int]<br>}"
-        
-        return (message+data)
+        resp = make_response(message+data)
+        resp.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:5500/'
+        return jsonify(resp)
+        # return jsonify(message)
+        #return (message+data)
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5500)
