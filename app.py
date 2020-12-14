@@ -18,7 +18,10 @@ def home():
     parameters: GET
     return: "Alive!"
     """
-    return "Alive!"
+    resp = make_response("Alive!")  
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
+    #return "Alive!"
 
 
 @app.route('/welcome', methods=["GET"])
