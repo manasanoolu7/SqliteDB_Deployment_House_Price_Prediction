@@ -57,6 +57,7 @@ def predict_api():
             message = {
                 "Predicted price": round(result, 2)
             }
+            message.headers['Access-Control-Allow-Origin'] = '*'
             return jsonify(message)
     elif request.method == "GET":
         message = "The page accept a POST request of data in following format:\n"
